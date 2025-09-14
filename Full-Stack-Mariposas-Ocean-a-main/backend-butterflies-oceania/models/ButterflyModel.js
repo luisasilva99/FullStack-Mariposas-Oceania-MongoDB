@@ -1,127 +1,138 @@
-// Importamos lo necesario
-import { DataTypes } from "sequelize";
-import db_connection from "../database/db_connection.js";
+import mongoose from 'mongoose';
 
-const ButterflyModel = db_connection.define('Butterfly', {
-    // id de la mariposa
-    id:{
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true // Es el id principal
-    },
-    // nombre de la mariposa
-    // Obligatorio
+const butterflySchema = new mongoose.Schema({
+    // nombre común de la mariposa - Obligatorio
     commonName: {
-        type: DataTypes.STRING, // para textos cortos
-        allowNull: false
+        type: String,
+        required: true
     },
-    //nombre cientifico
-    // Obligatorio
+    
+    // nombre científico - Obligatorio y único
     scientificName: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        type: String,
+        required: true,
         unique: true
-    }, 
-    //Familia
-    // Obligatorio
-    family:{
-        type: DataTypes.STRING,
-        allowNull: false
     },
-    //region de la mariposa
-    // Region   
-    region:{
-        type: DataTypes.STRING, 
-        allowNull: false
+    
+    // Familia - Obligatorio
+    family: {
+        type: String,
+        required: true
     },
-    //Locacion especifica
-    specificLocation:{
-        type: DataTypes.STRING,
-        allowNull: true
+    
+    // región de la mariposa - Obligatorio
+    region: {
+        type: String,
+        required: true
     },
-    //Habitad de la mariposa
+    
+    // Localización específica
+    specificLocation: {
+        type: String,
+        default: null
+    },
+    
+    // Hábitat de la mariposa
     habitat: {
-        type: DataTypes.STRING,
-        allowNull: true
+        type: String,
+        default: null
     },
-    // Tamaño de la ala de la mariposa (es un numero)
-    wingspan:{
-        type: DataTypes.DOUBLE,
-        allowNull: true
+    
+    // Tamaño de la ala de la mariposa
+    wingspan: {
+        type: Number,
+        default: null
     },
-    // Unidad de medida de la ala de la mariposa (cm, mm, m, etc)
-    wingspanUnit:{ 
-        type: DataTypes.STRING,
-        allowNull: true
-    }, 
-    // descripcion de la mariposa
-    description:{
-        type: DataTypes.TEXT, // Para textos largos
-        allowNull: true
+    
+    // Unidad de medida de la ala
+    wingspanUnit: {
+        type: String,
+        default: null
     },
-    // estado de conservacion de la mariposa
-    conservationStatus:{
-        type: DataTypes.STRING,
-        allowNull: true
+    
+    // descripción de la mariposa
+    description: {
+        type: String,
+        default: null
     },
-    // Nivel de preocupacion
-    // Obligatorio
-    threatLevel:{
-        type: DataTypes.STRING,
-        allowNull: false
+    
+    // estado de conservación de la mariposa
+    conservationStatus: {
+        type: String,
+        default: null
     },
+    
+    // Nivel de preocupación - Obligatorio
+    threatLevel: {
+        type: String,
+        required: true
+    },
+    
     // cantidad actual de la mariposa
-    population:{
-        type: DataTypes.STRING, 
-        allowNull: true
+    population: {
+        type: String,
+        default: null
     },
-    // Temporada de vuelo (es un array de 6 datos)
-    flightSeason:{
-        type: DataTypes.JSON,
-        defaultValue: [],
-        allowNull: true
+    
+    // Temporada de vuelo (array de 6 datos)
+    flightSeason: {
+        type: [String],
+        default: []
     },
-    // Es una array de dos datos
-    hostPlants:{
-        type: DataTypes.JSON,
-        defaultValue: [],
-        allowNull: true  // ✅ Corregido: era allowNull: []
+    
+    // Plantas hospederas (array de datos)
+    hostPlants: {
+        type: [String],
+        default: []
     },
-    // Es un array de 3 datos
-    nectarSources:{
-        type: DataTypes.JSON,
-        defaultValue: [], 
-        allowNull: true
+    
+    // Fuentes de néctar (array de 3 datos)
+    nectarSources: {
+        type: [String],
+        default: []
     },
-    // Comportamiento de la mariposa (solo texto)
-    behavior:{
-        type: DataTypes.TEXT,
-        allowNull: true
+    
+    // Comportamiento de la mariposa
+    behavior: {
+        type: String,
+        default: null
     },
+    
     // Coordenadas
-    coordinates:{
-        type: DataTypes.JSON,
-        allowNull: true,
-        defaultValue: {
-            latitude: 0, 
-            longitude: 0
+    coordinates: {
+        latitude: {
+            type: Number,
+            default: 0
+        },
+        longitude: {
+            type: Number,
+            default: 0
         }
     },
+    
     // Color primario
-    colorPrimary:{
-        type: DataTypes.STRING, 
-        allowNull: true  // ✅ Corregido: era allowNul
+    colorPrimary: {
+        type: String,
+        default: null
     },
-    // Tag (es un array de 4 datos)
-    tags:{
-        type: DataTypes.JSON,
-        defaultValue: [],
-        allowNull: true
+    
+    // Tags (array de 4 datos)
+    tags: {
+        type: [String],
+        default: []
     },
-    // Es para colocar la foto de la mariposa (se coloca como con uncodigo que le da cloudinary)
-    publicId:{
-        type: DataTypes.STRING, 
+    
+    // ID público para Cloudinary
+    publicId: {
+        type: String,
+        default: null
     }
+}, {
+    timestamps: false // Para mantener consistencia con tu modelo anterior
 });
 
+// Crear el modelo
+const ButterflyModel = mongoose.model('Butterfly', butterflySchema);
+
 export default ButterflyModel;
+ButterflyModel.js

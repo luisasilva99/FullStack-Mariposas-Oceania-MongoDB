@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL_API= " http://localhost:8000/butterflies";
+const URL_API= "http://localhost:8000/butterflies";
 
 
 //Metodo GET para el READ
