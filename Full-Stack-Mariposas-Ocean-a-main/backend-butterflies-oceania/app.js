@@ -1,3 +1,4 @@
+// app.js
 import express from 'express';
 import cors from 'cors';
 import { connectDB, closeDB } from './database/db_connection.js';

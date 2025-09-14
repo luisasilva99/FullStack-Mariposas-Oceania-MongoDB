@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 
-import mongoose from 'mongoose';
-
 const butterflySchema = new mongoose.Schema({
     // nombre común de la mariposa - Obligatorio
     commonName: {

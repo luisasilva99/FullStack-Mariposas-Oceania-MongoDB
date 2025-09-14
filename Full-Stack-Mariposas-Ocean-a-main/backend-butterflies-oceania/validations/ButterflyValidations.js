@@ -176,12 +176,15 @@ export const validarDatosMariposa = (datos) => {
       mensaje: "El nivel de amenaza es obligatorio",
     });
   } else {
-    // Lista de niveles válidos 
+    // Lista de niveles válidos - CORREGIDA
     const nivelesValidos = [
+      "Low",
+      "Medium",
+      "High",
+      "Critical",
       "vulnerable",
       "preocupacion menor",
-      "Peligro Critico",
-      "Critico"
+      "Peligro Critico"
     ];
 
     if (!nivelesValidos.includes(datos.threatLevel)) {
@@ -197,7 +200,7 @@ export const validarDatosMariposa = (datos) => {
   const errorPlantas = revisarCampoTexto(
     datos.hostPlants,
     "plantas hospederas",
-    true, // Obligatorio
+    false, // Obligatorio
     2, // Mínimo 2 caracteres
     300 // Máximo 300 caracteres
   );
