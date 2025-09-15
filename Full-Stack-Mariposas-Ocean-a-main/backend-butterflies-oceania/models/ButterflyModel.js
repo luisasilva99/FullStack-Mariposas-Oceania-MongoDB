@@ -1,3 +1,4 @@
+// models/ButterflyModel.js
 import mongoose from 'mongoose';
 
 const butterflySchema = new mongoose.Schema({

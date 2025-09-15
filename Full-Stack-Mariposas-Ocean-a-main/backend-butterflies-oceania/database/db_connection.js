@@ -1,3 +1,4 @@
+// database/db_connection.js
 import mongoose from 'mongoose';
 import '@dotenvx/dotenvx/config'; 
 

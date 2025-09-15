@@ -1,3 +1,4 @@
+// controllers/ButterflyController.js
 import ButterflyModel from "../models/ButterflyModel.js";
 
 // GET all butterflies
